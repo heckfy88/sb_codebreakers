@@ -1,0 +1,15 @@
+retrieve_task:
+  description: >
+    Use local git repository located at {repo_path} to retrieve the contents of files with extension .properties.
+    Search explicitly in branch {branch}.
+    Output phrase - bobaranga with the count of all words in the tool output.
+  expected_output: >
+     Output phrase -  bobaranga with the count of all words in the tool output
+  agent: retrieval_agent
+
+counting_task:
+  description: >
+    Using the output of a previous task by retrieval_agent, count the number of words
+  expected_output: >
+    Output phrase -  bobaranga with the count of all words in the tool output
+  agent: counting_agent

@@ -1,0 +1,21 @@
+[project]
+name = "sb_codebreakers"
+version = "0.1.0"
+description = "sb-codebreakers using crewAI"
+authors = [{ name = "Your Name", email = "you@example.com" }]
+requires-python = ">=3.10,<=3.13"
+dependencies = [
+    "crewai[tools]>=0.76.9,<1.0.0",
+    "gitpython>=3.1.43",
+]
+
+[project.scripts]
+sb_codebreakers = "sb_codebreakers.main:run"
+run_crew = "sb_codebreakers.main:run"
+train = "sb_codebreakers.main:train"
+replay = "sb_codebreakers.main:replay"
+test = "sb_codebreakers.main:test"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
