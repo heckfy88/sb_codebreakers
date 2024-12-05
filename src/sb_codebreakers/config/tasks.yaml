@@ -8,14 +8,12 @@ retrieve_task:
     The output should be well-organized, with no duplicates or irrelevant files, and formatted to be easily used by another agent.
   agent: retrieval_agent
 
-fix_task:
-  description: >
-    Use the list of .java files from the retrieval agent to analyze the current Java source code. 
-    Identify and fix discrepancies between the {actual_result} produced by the code and the {expected_result} expected. 
-    Implement code modifications to resolve the issues, ensuring the changes address the root cause of the bugs. 
-    Revise the result and ensure the results match the expected behavior.
-  expected_output: >
-    A Git diff file that shows all the changes made to the Java code, highlighting modified, added, or deleted lines. 
-    The output should be formatted clearly, making it easy for the user to review and apply the bug fixes in their repository.
-    Output git diff file should be saved to the diff.txt file. Don't save the final result text, only the diff
-  agent: fixing_agent
+develop_task:
+  description: >  
+    Use the source code provided by the `retrieval_agent` to address the task described in {task_description}.  
+    Analyze the existing codebase, make the required modifications, and generate a `git diff` file that reflects the changes.
+  expected_output: >  
+    A complete `git diff` file containing all code modifications made to implement the task described in {task_description}.  
+    The diff should be clean, well-documented, and compatible with the existing codebase, ensuring no errors or inconsistencies. 
+    It should not contain any unnecessary or irrelevant changes or comments that are not relevant to the task.
+  agent: developer_agent

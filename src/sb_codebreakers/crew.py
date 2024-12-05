@@ -24,9 +24,9 @@ class SbCodebreakersCrew:
         )
 
     @agent
-    def fixing_agent(self) -> Agent:
+    def developer_agent(self) -> Agent:
         return Agent(
-            config=self.agents_config['fixing_agent'],
+            config=self.agents_config['developer_agent'],
             verbose=True,
             llm=LLM(
                 model="litellm_proxy/gigachat-custom-model",
@@ -44,9 +44,9 @@ class SbCodebreakersCrew:
         )
 
     @task
-    def fix_task(self) -> Task:
+    def develop_task(self) -> Task:
         return Task(
-            config=self.tasks_config['fix_task'],
+            config=self.tasks_config['develop_task'],
             human_input=True,
             output_file="diff.txt"
         )
