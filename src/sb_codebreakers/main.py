@@ -18,6 +18,9 @@ def run():
     inputs = {
         "repo_path": "/Users/ruslanagaev/uni/codebreaker",
         "branch": "develop",
+
+        "actual_result": "Current month is: Current month is: This is January",
+        "expected_result": "Current month is: January"
     }
     SbCodebreakersCrew().crew().kickoff(inputs=inputs)
 
