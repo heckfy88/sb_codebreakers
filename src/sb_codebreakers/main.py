@@ -12,21 +12,17 @@ os.environ["OPENAI_API_KEY"] = "NA"
 os.environ["OTEL_SDK_DISABLED"] = "true"
 
 local_repository_path = os.environ["LOCAL_REPOSITORY_PATH"]
-branch = os.environ["BRANCH"]
-
-actual_result_file_path = os.environ["ACTUAL_RESULT_FILE_PATH"]
-expected_result_file_path = os.environ["EXPECTED_RESULT_FILE_PATH"]
+description_path = os.environ["DESCRIPTION_PATH"]
 
 def run():
-    actual_result = open(actual_result_file_path, "r").read()
-    expected_result = open(expected_result_file_path, "r").read()
+    actual_result = open(description_path + "/actual_result.txt", "r").read()
+    expected_result = open(description_path + "/expected_result.txt", "r").read()
 
     """
     Run the crew.
     """
     inputs = {
         "repo_path": local_repository_path,
-        "branch": branch,
 
         "actual_result": actual_result,
         "expected_result": expected_result

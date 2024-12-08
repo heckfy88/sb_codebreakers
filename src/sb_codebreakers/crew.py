@@ -1,7 +1,11 @@
+import os
+
 from crewai import Agent, Crew, Process, LLM, Task
 from crewai.project import CrewBase, agent, crew, task
 
-from src.sb_codebreakers.tools.git_search_tool import my_git_loader_tool
+from src.sb_codebreakers.tools.files_read_tool import FilesReadTool
+
+llm_base_url = os.environ['LLM_BASE_URL']
 
 
 @CrewBase
@@ -12,11 +16,11 @@ class SbCodebreakersCrew:
     def retrieval_agent(self) -> Agent:
         return Agent(
             config=self.agents_config['retrieval_agent'],
-            tools=[my_git_loader_tool],
             verbose=True,
+            tool=[FilesReadTool()],
             llm=LLM(
                 model="litellm_proxy/gigachat-custom-model",
-                base_url="http://localhost:4000",
+                base_url=llm_base_url,
                 # не нужно, но вдруг придется указывать разные ключи для каждого агента?
                 api_key="<API_KEY>"
             ),
@@ -30,7 +34,7 @@ class SbCodebreakersCrew:
             verbose=True,
             llm=LLM(
                 model="litellm_proxy/gigachat-custom-model",
-                base_url="http://localhost:4000",
+                base_url=llm_base_url,
                 api_key="<API_KEY>"
             ),
             task=self.fix_task
@@ -59,7 +63,7 @@ class SbCodebreakersCrew:
             process=Process.sequential,
             verbose=True,
             # желательно бы настроить, но у меня он пытается обратиться к OpenAI все равно
-            #planning=True,
-            #planning_llm
+            # planning=True,
+            # planning_llm
             # process=Process.hierarchical, # In case you wanna use that instead https://docs.crewai.com/how-to/Hierarchical/
         )

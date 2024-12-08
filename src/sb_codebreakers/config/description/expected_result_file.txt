@@ -1,1 +1,0 @@
-"Current month is: This is January"
