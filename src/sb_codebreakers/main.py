@@ -15,6 +15,8 @@ local_repository_path = os.environ["LOCAL_REPOSITORY_PATH"]
 description_path = os.environ["DESCRIPTION_PATH"]
 
 def run():
+    local_repository_content =  open(local_repository_path + "/content.txt", "r").read()
+
     actual_result = open(description_path + "/actual_result.txt", "r").read()
     expected_result = open(description_path + "/expected_result.txt", "r").read()
 
@@ -22,7 +24,7 @@ def run():
     Run the crew.
     """
     inputs = {
-        "repo_path": local_repository_path,
+        "local_repository_content": local_repository_content,
 
         "actual_result": actual_result,
         "expected_result": expected_result

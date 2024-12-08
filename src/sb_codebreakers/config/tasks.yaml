@@ -1,16 +1,8 @@
-retrieve_task:
-  description: >
-    Output the files contents from a directory
-    
-    The path to the directory: {repo_path}
-  expected_output: >
-    All the contents
-    The output should be well-organized, with no duplicates or irrelevant files, and formatted to be easily used by another agent.
-  agent: retrieval_agent
-
 fix_task:
   description: >
-    Use the list of .java files from the retrieval agent to analyze the current Java source code. 
+    Read the following text representation of a project - {local_repository_content}
+    
+    Use the content by the local_repository_content to analyze the current Java or Kotlin source code. 
     Identify and fix discrepancies between the {actual_result} produced by the code and the {expected_result} expected. 
     Implement code modifications to resolve the issues, ensuring the changes address the root cause of the bugs. 
     Revise the result and ensure the results match the expected behavior.

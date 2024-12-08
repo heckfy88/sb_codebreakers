@@ -3,29 +3,12 @@ import os
 from crewai import Agent, Crew, Process, LLM, Task
 from crewai.project import CrewBase, agent, crew, task
 
-from src.sb_codebreakers.tools.files_read_tool import FilesReadTool
-
 llm_base_url = os.environ['LLM_BASE_URL']
 
 
 @CrewBase
 class SbCodebreakersCrew:
     """Cb crew"""
-
-    @agent
-    def retrieval_agent(self) -> Agent:
-        return Agent(
-            config=self.agents_config['retrieval_agent'],
-            verbose=True,
-            tool=[FilesReadTool()],
-            llm=LLM(
-                model="litellm_proxy/gigachat-custom-model",
-                base_url=llm_base_url,
-                # не нужно, но вдруг придется указывать разные ключи для каждого агента?
-                api_key="<API_KEY>"
-            ),
-            task=self.retrieve_task
-        )
 
     @agent
     def fixing_agent(self) -> Agent:
@@ -38,13 +21,6 @@ class SbCodebreakersCrew:
                 api_key="<API_KEY>"
             ),
             task=self.fix_task
-        )
-
-    @task
-    def retrieve_task(self) -> Task:
-        return Task(
-            config=self.tasks_config['retrieve_task'],
-            human_input=True,
         )
 
     @task
